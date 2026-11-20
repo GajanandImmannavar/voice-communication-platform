@@ -80,8 +80,8 @@ const Analytics = () => {
   /* =====================================================
      3️⃣ LANGUAGE DISTRIBUTION
   ===================================================== */
-  const languageData = Object.values(
-    calls.reduce((acc: any, c) => {
+    const languageData: { name: string; value: number }[] = Object.values(
+    calls.reduce((acc: Record<string, { name: string; value: number }>, c) => {
       const lang = c.language || "Unknown";
       acc[lang] ??= { name: lang, value: 0 };
       acc[lang].value++;
@@ -214,3 +214,35 @@ const Analytics = () => {
 };
 
 export default Analytics;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// In src/admin/pages/Analytics.tsx, replace lines 83–90 with:
+
+//  const languageData = Object.values(
+//     calls.reduce((acc: any, c) => {
+//       const lang = c.language || "Unknown";
+//       acc[lang] ??= { name: lang, value: 0 };
+//       acc[lang].value++;
+//       return acc;
+//     }, {})
+//   );

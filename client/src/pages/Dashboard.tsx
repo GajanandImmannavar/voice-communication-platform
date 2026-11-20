@@ -5,7 +5,7 @@ import { useTheme } from "../context/ThemeContext";
 
 function Dashboard() {
   const { user, token } = useAuth();
-  const { darkMode } = useTheme();
+  const { darkMode: _darkMode } = useTheme();
 
   const [showLanguageForm, setShowLanguageForm] = useState(false);
   const [language, setLanguage] = useState("");

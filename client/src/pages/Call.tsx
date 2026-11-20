@@ -514,7 +514,13 @@ const Call = () => {
       forceEndCall();
     });
 
-    return () => socket.disconnect();
+  //   return () => socket.disconnect();
+  // }, [token]);
+
+
+      return () => {
+      socket.disconnect();
+    };
   }, [token]);
 
   // ================= AUTO SCROLL =================
@@ -616,7 +622,7 @@ const Call = () => {
 
   const msg = {
     id: Date.now(), // ✅ unique id
-    senderId: user?._id,
+    senderId: user?.id,
     senderName: user?.name,
     text,
     time: new Date().toLocaleTimeString([], {
@@ -769,7 +775,7 @@ const Call = () => {
   <div className="flex-1 overflow-y-auto p-3 space-y-3">
 
     {messages.map((m, i) => {
-      const isMe = m.senderId === user?._id;
+      const isMe = m.senderId === user?.id;
 
       return (
         <div key={m.id || i} className={`flex ${isMe ? "justify-end" : "justify-start"}`}>
