@@ -202,7 +202,8 @@ module.exports = (io) => {
     });
 
     // ================= CHAT =================
-    socket.on("chat-message", ({ message }) => {
+    // ================= CHAT =================
+    socket.on("chat-message", (message) => {
       if (socket.partner) {
         io.to(socket.partner).emit("chat-message", message);
       }
