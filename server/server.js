@@ -173,12 +173,21 @@ const startServer = async () => {
 
     const server = http.createServer(app);
 
+    // const io = new Server(server, {
+    //   cors: {
+    //     origin: "http://localhost:5173",
+    //     methods: ["GET", "POST"],
+    //   },
+    // });
     const io = new Server(server, {
-      cors: {
-        origin: "http://localhost:5173",
-        methods: ["GET", "POST"],
-      },
-    });
+    cors: {
+    origin: [
+      "http://localhost:5173",
+      process.env.CLIENT_URL,
+    ].filter(Boolean),
+    methods: ["GET", "POST"],
+        },
+     });
 
     // ✅ attach socket module
     require("./sockets")(io);

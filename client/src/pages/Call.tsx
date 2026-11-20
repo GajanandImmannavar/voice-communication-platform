@@ -435,7 +435,8 @@ const Call = () => {
   useEffect(() => {
     if (!token) return;
 
-    const socket = io("http://localhost:5000", {
+    // const socket = io("http://localhost:5000", {
+    const socket = io(import.meta.env.VITE_API_URL, {
       auth: { token },
       withCredentials: true,
       transports: ["websocket", "polling"], // ✅ FIX
@@ -459,7 +460,7 @@ const Call = () => {
       setTimeout(() => setCallPopup(null), 2000);
 
       if (callId) {
-        await fetch("http://localhost:5000/api/call/update-receiver", {
+        await fetch(`${import.meta.env.VITE_API_URL}/api/call/update-receiver`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -584,7 +585,7 @@ const Call = () => {
         await localAudio.current.play().catch(() => {});
       }
 
-      const res = await fetch("http://localhost:5000/api/call/start", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/call/start`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -654,7 +655,7 @@ const Call = () => {
     socketRef.current?.emit("end-call");
 
     if (callId) {
-      await fetch("http://localhost:5000/api/call/end", {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/call/end`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -693,7 +694,7 @@ const Call = () => {
     const reason = prompt("Enter report reason");
     if (!reason) return;
 
-    await fetch("http://localhost:5000/api/call/report", {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/call/report`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

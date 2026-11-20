@@ -1,13 +1,41 @@
+// import axios from "axios";
+
+// const api = axios.create({
+//   baseURL: "http://localhost:5000/api", // backend URL
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// });
+
+// // Optional: attach token automatically
+// api.interceptors.request.use((config) => {
+//   const token = localStorage.getItem("token");
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+//   return config;
+// });
+
+// export default api;
+
+
+
+
+
+
+
+// while delpoying
+
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api", // backend URL
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// Optional: attach token automatically
+// Attach token automatically
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {

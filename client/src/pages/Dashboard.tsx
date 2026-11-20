@@ -24,7 +24,8 @@ function Dashboard() {
       setMessage("");
 
       await axios.post(
-        "http://localhost:5000/api/language/select",
+        // "http://localhost:5000/api/language/select",
+        `${import.meta.env.VITE_API_URL}/api/language/select`,
         { language, reason },
         {
           headers: { Authorization: `Bearer ${token}` },

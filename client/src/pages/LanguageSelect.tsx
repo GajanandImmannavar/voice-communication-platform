@@ -93,7 +93,8 @@ const LanguageSelect = () => {
 
       // ✅ SAVE LANGUAGE IN DB
       await axios.post(
-        "http://localhost:5000/api/language/select",
+        // "http://localhost:5000/api/language/select",
+        `${import.meta.env.VITE_API_URL}/api/language/select`,
         {
           language,
           reason: "call", // required in your schema
@@ -107,7 +108,8 @@ const LanguageSelect = () => {
 
       // ✅ THEN START CALL
       const res = await axios.post(
-        "http://localhost:5000/api/call/start",
+        // "http://localhost:5000/api/call/start",
+        `${import.meta.env.VITE_API_URL}/api/call/start`,
         { language },
         {
           headers: {
