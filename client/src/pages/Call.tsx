@@ -489,9 +489,23 @@ const Call = () => {
       socket.emit("answer", { target: from, answer });
     });
 
+    // socket.on("answer", async ({ answer }) => {
+    //   await peerRef.current?.setRemoteDescription(answer);
+    // });
+
     socket.on("answer", async ({ answer }) => {
-      await peerRef.current?.setRemoteDescription(answer);
-    });
+  const peer = peerRef.current;
+
+  if (!peer) return;
+
+  // Accept an answer only when we are waiting for one
+  if (peer.signalingState !== "have-local-offer") {
+    console.log("Ignoring duplicate or unexpected answer:", peer.signalingState);
+    return;
+  }
+
+  await peer.setRemoteDescription(answer);
+  });
 
     socket.on("ice-candidate", async ({ candidate }) => {
       if (candidate) {
