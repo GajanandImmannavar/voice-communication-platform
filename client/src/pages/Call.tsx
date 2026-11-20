@@ -651,7 +651,11 @@ const Call = () => {
   };
 
   console.log("📤 Sending chat message:", msg);
-socketRef.current?.emit("chat-message", msg);
+  console.log("📤 Sending chat message:", msg);
+  console.log("Socket connected:", socketRef.current?.connected);
+  console.log("Socket ID:", socketRef.current?.id);
+  socketRef.current?.emit("chat-message", msg);
+  socketRef.current?.emit("chat-message", msg);
 setMessages((prev) => [...prev, msg]);
 
   setText("");
