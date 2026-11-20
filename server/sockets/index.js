@@ -203,11 +203,25 @@ module.exports = (io) => {
 
     // ================= CHAT =================
     // ================= CHAT =================
-    socket.on("chat-message", (message) => {
-      if (socket.partner) {
-        io.to(socket.partner).emit("chat-message", message);
-      }
-    });
+    // socket.on("chat-message", (message) => {
+    //   if (socket.partner) {
+    //     io.to(socket.partner).emit("chat-message", message);
+    //   }
+    // });
+
+    // ================= CHAT =================
+socket.on("chat-message", (message) => {
+  console.log("📩 Message received:", message.text);
+  console.log("👥 Sender:", socket.id);
+  console.log("🤝 Partner:", socket.partner);
+
+  if (socket.partner) {
+    io.to(socket.partner).emit("chat-message", message);
+    console.log("✅ Message forwarded to partner:", socket.partner);
+  } else {
+    console.log("❌ No partner connected");
+  }
+});
 
     // ================= END =================
     socket.on("end-call", () => {
