@@ -489,9 +489,6 @@ const Call = () => {
       socket.emit("answer", { target: from, answer });
     });
 
-    // socket.on("answer", async ({ answer }) => {
-    //   await peerRef.current?.setRemoteDescription(answer);
-    // });
 
     socket.on("answer", async ({ answer }) => {
   const peer = peerRef.current;
@@ -514,8 +511,13 @@ const Call = () => {
     });
 
     socket.on("chat-message", (message) => {
-      setMessages((prev) => [...prev, { ...message, status: "seen" }]);
-    });
+  console.log("📥 Received chat message:", message);
+
+  setMessages((prev) => [
+    ...prev,
+    { ...message, status: "seen" },
+  ]);
+});
 
     socket.on("call-ended", () => {
       setCallPopup("Call ended");
@@ -648,8 +650,9 @@ const Call = () => {
     replyTo: replyTo || null,
   };
 
-  socketRef.current?.emit("chat-message", msg); // ✅ FIX (no nested object)
-  setMessages((prev) => [...prev, msg]);
+  console.log("📤 Sending chat message:", msg);
+socketRef.current?.emit("chat-message", msg);
+setMessages((prev) => [...prev, msg]);
 
   setText("");
   setReplyTo(null);
