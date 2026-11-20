@@ -211,7 +211,7 @@ module.exports = (io) => {
 
     // ================= CHAT =================
 socket.on("chat-message", (message) => {
-  console.log("📩 Message received:", message.text);
+  console.log("📩 Full message received:", message);
   console.log("👥 Sender:", socket.id);
   console.log("🤝 Partner:", socket.partner);
 
